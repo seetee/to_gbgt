@@ -1,0 +1,25 @@
+#!/bin/bash 
+to_gbgt() {
+  local expr="$1"
+
+  # Map abbreviations to IANA zones
+  local tz=""
+  case "${expr}" in
+    *"[[:space:]](PST|PT)[[:space:]]"*|" PST"|" PT"|*-PST*|-PT*)     tz="America/Los_Angeles" ;;
+    *"[[:space:]](MST|MT)[[:space:]]"*|" MST"|" MT"|*-MST*|-MT*)     tz="America/Denver" ;;
+    *"[[:space:]](CST|CT)[[:space:]]"*|" CST"|" CT"|*-CST*|-CT*)     tz="America/Chicago" ;;
+    *"[[:space:]](EST|ET)[[:space:]]"*|" EST"|" ET"|*-EST*|-ET*)     tz="America/New_York" ;;
+    *"[[:space:]](GMT|UTC|Z)[[:space:]]"*|" GMT"|" UTC"|" Z")        tz="UTC" ;;
+    *"[[:space:]](BST)[[:space:]]"*|" BST")                          tz="Europe/London" ;;
+    *"[[:space:]](CET|CEST)[[:space:]]"*|" CET"|" CEST"|*-CET*|-CEST*) tz="Europe/Stockholm" ;;
+  esac
+
+  # Default to Gothenburg if no zone detected
+  : ${tz:=Europe/Stockholm}
+
+  # Strip known timezone abbrevs from the input for clean date parsing
+  local clean_expr
+  clean_expr=$(echo "$expr" | sed -E 's/[[:space:]]+(EST|EDT|CST|CDT|MST|MDT|PST|PDT|ET|CT|MT|PT|GMT|UTC|Z|CET|CEST|BST)[[:space:]]*/ /gi' | sed -E 's/^ +| +$//g')
+
+  TZ="Europe/Stockholm" date -d "$(TZ="$tz" date -d "$clean_expr" +%s 2>/dev/null || TZ="UTC" date -d "$clean_expr" +%s)" "+%Y-%m-%d %H:%M"
+}
