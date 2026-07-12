@@ -4,14 +4,14 @@ to_gbgt() {
 
   # Map abbreviations to IANA zones
   local tz=""
-  case "${expr}" in
-    *"[[:space:]](PST|PT)[[:space:]]"*|" PST"|" PT"|*-PST*|-PT*)     tz="America/Los_Angeles" ;;
-    *"[[:space:]](MST|MT)[[:space:]]"*|" MST"|" MT"|*-MST*|-MT*)     tz="America/Denver" ;;
-    *"[[:space:]](CST|CT)[[:space:]]"*|" CST"|" CT"|*-CST*|-CT*)     tz="America/Chicago" ;;
-    *"[[:space:]](EST|ET)[[:space:]]"*|" EST"|" ET"|*-EST*|-ET*)     tz="America/New_York" ;;
-    *"[[:space:]](GMT|UTC|Z)[[:space:]]"*|" GMT"|" UTC"|" Z")        tz="UTC" ;;
-    *"[[:space:]](BST)[[:space:]]"*|" BST")                          tz="Europe/London" ;;
-    *"[[:space:]](CET|CEST)[[:space:]]"*|" CET"|" CEST"|*-CET*|-CEST*) tz="Europe/Stockholm" ;;
+  case "$expr" in
+    *PST*|*PDT*|*PT*)   tz="America/Los_Angeles" ;;
+    *MST*|*MDT*|*MT*)   tz="America/Denver" ;;
+    *CST*|*CDT*|*CT*)   tz="America/Chicago" ;;
+    *EST*|*EDT*|*ET*)   tz="America/New_York" ;;
+    *UTC*|*GMT*|*Z)     tz="UTC" ;;
+    *BST*)              tz="Europe/London" ;;
+    *CET*|*CEST*)       tz="Europe/Stockholm" ;;
   esac
 
   # Default to Gothenburg if no zone detected
