@@ -140,7 +140,7 @@ Not tested on macOS. BSD `date` does not support `-d` for natural language parsi
 
 - **Abbreviation ambiguity.** "CST" could be US Central, China Standard, or Cuba Standard. The script assumes US Central. There is no way to disambiguate from context in a single-argument function.
 - **No multi-zone strings.** The function finds one timezone abbreviation. Expressions containing multiple time references are not supported.
-- **GNU `date` parsing limits.** If `date -d` can't parse the stripped string, the function falls back to UTC and may produce unexpected results. Exotic date phrasings may fail silently.
+- **GNU `date` parsing limits.** If `date -d` can't parse the stripped string, the function fails with a message.
 - **Two-digit years.** GNU `date` interprets 2-digit years using a sliding window. Always provide 4-digit years for safety.
 
 ## License
