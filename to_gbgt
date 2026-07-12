@@ -21,5 +21,10 @@ to_gbgt() {
   local clean_expr
   clean_expr=$(echo "$expr" | sed -E 's/[[:space:]]+(EST|EDT|CST|CDT|MST|MDT|PST|PDT|ET|CT|MT|PT|GMT|UTC|Z|CET|CEST|BST)[[:space:]]*/ /gi' | sed -E 's/^ +| +$//g')
 
-  TZ="Europe/Stockholm" date -d "$(TZ="$tz" date -d "$clean_expr" +%s 2>/dev/null || TZ="UTC" date -d "$clean_expr" +%s)" "+%Y-%m-%d %H:%M"
+  if ! ts=$(TZ="$tz" date -d "$clean_expr" +%s 2>/dev/null); then
+    echo "Unable to parse: $expr" >&2
+    return 1
+  fi
+
+  TZ="Europe/Stockholm" date -d "@$ts" "+%Y-%m-%d %H:%M"
 }
