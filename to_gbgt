@@ -19,7 +19,13 @@ to_gbgt() {
 
   # Strip known timezone abbrevs from the input for clean date parsing
   local clean_expr
-  clean_expr=$(echo "$expr" | sed -E 's/[[:space:]]+(EST|EDT|CST|CDT|MST|MDT|PST|PDT|ET|CT|MT|PT|GMT|UTC|Z|CET|CEST|BST)[[:space:]]*/ /gi' | sed -E 's/^ +| +$//g')
+  clean_expr=$(echo "$expr" |
+    sed -E '
+      s/[[:space:]]+(EST|EDT|CST|CDT|MST|MDT|PST|PDT|ET|CT|MT|PT|GMT|UTC|Z|CET|CEST|BST)[[:space:]]*/ /Ig;
+      s/\b([0-9]{1,2})(st|nd|rd|th)\b/\1/Ig;
+      s/\bat\b/ /Ig;
+      s/^ +| +$//g
+    ')
 
   if ! ts=$(TZ="$tz" date -d "$clean_expr" +%s 2>/dev/null); then
     echo "Unable to parse: $expr" >&2
