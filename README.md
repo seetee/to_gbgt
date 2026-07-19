@@ -1,7 +1,7 @@
 # to_gbgt
 
-![Vibe Coded](https://img.shields.io/badge/vibe_coded-✨-a855f7?style=for-the-badge&labelColor=1a1a2e)
-![Made with Lumo](https://img.shields.io/badge/made_with-Lumo-6d4aff?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOCIgZmlsbD0iI2ZmZmZmZiIvPjwvc3ZnPg==)
+[![vibe coded](https://img.shields.io/badge/vibe_coded-%E2%9C%A8-ff69b4?style=flat-square)](https://en.wikipedia.org/wiki/Vibe_coding)
+![Made with Lumo](https://img.shields.io/badge/made_with-Lumo-6d4aff?style=flat-square&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iOCIgZmlsbD0iI2ZmZmZmZiIvPjwvc3ZnPg==)
 
 A Bash function that parses messy, natural-language time expressions — with or without timezone abbreviations — and outputs clean ISO 8601 timestamps in Gothenburg local time (Europe/Stockholm).
 
